@@ -1,0 +1,11 @@
+<%= form_for @conn, @action, [multipart: true], fn f -> %>
+  
+  <%= label f, :file %>
+  <%= file_input f, :file %>
+  <%= error_tag f, :file %>
+
+  <div>
+    <%= submit "Save" %>
+  </div>
+<% end %>
+

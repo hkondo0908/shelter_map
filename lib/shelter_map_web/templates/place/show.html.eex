@@ -1,0 +1,43 @@
+<h1>Show Place</h1>
+
+<ul>
+
+  <li>
+    <strong>Name:</strong>
+    <%= @place.name %>
+  </li>
+
+  <li>
+    <strong>Lat:</strong>
+    <%= @place.lat %>
+  </li>
+
+  <li>
+    <strong>Lng:</strong>
+    <%= @place.lng %>
+  </li>
+
+  <li>
+    <strong>Gcode:</strong>
+    <%= @place.gcode %>
+  </li>
+
+  <li>
+    <strong>Area:</strong>
+    <%= @place.area %>
+  </li>
+
+  <li>
+    <strong>Address:</strong>
+    <%= @place.address %>
+  </li>
+
+  <li>
+    <strong>Villages:</strong>
+    <%= @place.villages %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: Routes.place_path(@conn, :edit, @place) %></span>
+<span><%= link "Back", to: Routes.place_path(@conn, :index) %></span>

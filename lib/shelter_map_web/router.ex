@@ -17,6 +17,12 @@ defmodule ShelterMapWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :index
+    post "/page/area", PageController, :showArea
+    resources "/place", PlaceController
+    get "/place/new/file", PlaceController, :newFile
+    post "/place/create/file", PlaceController, :createFile
+    get "/place/create/:list", PlaceController, :createList
+    delete "/place/delete/all/all", PlaceController, :deleteAll
   end
 
   # Other scopes may use custom stacks.

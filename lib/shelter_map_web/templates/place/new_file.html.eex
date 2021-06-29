@@ -1,0 +1,6 @@
+<h1>New Place</h1>
+
+
+<%= render "form_file.html", Map.put(assigns, :action, Routes.place_path(@conn, :createFile)) %>
+
+<span><%= link "Back", to: Routes.page_path(@conn, :index) %></span>

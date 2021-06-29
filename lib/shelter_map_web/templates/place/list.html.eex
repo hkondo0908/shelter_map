@@ -1,0 +1,16 @@
+<table>
+<tr><th>lat</th><th>lng</th><th>name</th>
+<% IO.inspect(@list)%>
+<%= for place <- @list do%>
+<tr>
+    <td><%=place["緯度"]%></td>
+    <td><%=place["経度"]%></td>
+    <td><%=place["\uFEFF避難所_名称"]%></td>
+</tr>
+<% end%>
+</table>
+<p>上記の内容で登録してよろしいですか？</p>
+
+<%= link "はい", to: Routes.place_path(@conn, :createList, @list)%>
+<%= link "いいえ", to: Routes.place_path(@conn, :createFile)%>
+</div>

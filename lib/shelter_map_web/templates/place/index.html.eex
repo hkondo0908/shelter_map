@@ -1,0 +1,38 @@
+<h1>Listing Place</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Lat</th>
+      <th>Lng</th>
+      <th>Gcode</th>
+      <th>Area</th>
+      <th>Address</th>
+      <th>Villages</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for place <- @place do %>
+    <tr>
+      <td><%= place.name %></td>
+      <td><%= place.lat %></td>
+      <td><%= place.lng %></td>
+      <td><%= place.gcode %></td>
+      <td><%= place.area %></td>
+      <td><%= place.address %></td>
+      <td><%= place.villages %></td>
+
+      <td>
+        <span><%= link "Show", to: Routes.place_path(@conn, :show, place) %></span>
+        <span><%= link "Edit", to: Routes.place_path(@conn, :edit, place) %></span>
+        <span><%= link "Delete", to: Routes.place_path(@conn, :delete, place), method: :delete, data: [confirm: "Are you sure?"] %></span>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<span><%= link "New Place", to: Routes.place_path(@conn, :new) %></span>

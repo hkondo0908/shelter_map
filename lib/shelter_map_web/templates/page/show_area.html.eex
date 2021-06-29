@@ -1,6 +1,5 @@
 <% 
 [head|_tail] = @place
-area_list = Enum.uniq(Enum.map(@place,&(&1.villages)))
 %>
 <section class="phx-hero">
   <h1><%= gettext "Welcome to %{name}!", name: "Phoenix" %></h1>
@@ -8,14 +7,7 @@ area_list = Enum.uniq(Enum.map(@place,&(&1.villages)))
 </section>
 <div id="map">map</div>
 
-<%= form_for @conn, Routes.page_path(@conn,:showArea),fn f->%>
-<%= label f, :villages %>
-<%= select f, :villages,area_list,prompt: "東京23区"%>
-<%= error_tag f, :villages %>
-<div>
-  <%= submit "表示" %>
-</div>
-<% end %>
+<%= link "Top page", to: Routes.page_path(@conn, :index)%>
 
 <section class="row">
   <table>
@@ -26,7 +18,7 @@ area_list = Enum.uniq(Enum.map(@place,&(&1.villages)))
       <th>都道府県</th>
       <th>指定区市町村</th>
       <th>住所</th>
-
+      
       <th></th>
     </tr>
   </thead>
@@ -38,7 +30,7 @@ area_list = Enum.uniq(Enum.map(@place,&(&1.villages)))
       <td><%= place.area %></td>
       <td><%= place.villages %></td>
       <td><%= place.address %></td>
-      
+
       <td>
         <span><%= link "Show", to: Routes.place_path(@conn, :show, place) %></span>
         <span><%= link "Edit", to: Routes.place_path(@conn, :edit, place) %></span>
@@ -52,8 +44,9 @@ area_list = Enum.uniq(Enum.map(@place,&(&1.villages)))
 
 </section>
 <span><%= link "Fileから取り込む", to: Routes.place_path(@conn, :newFile) %></span>
+<span><%= link "delete_all", to: Routes.place_path(@conn, :deleteAll),method: :delete,data: [confirm: "Are you sure?"] %></span>
 <script>
-var map = L.map('map').setView([<%= head.lat %>, <%= head.lng %>], 14);
+var map = L.map('map').setView([<%= head.lat %>, <%= head.lng %>], 15);
 
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -61,8 +54,8 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 
 <%= for pla <- @place do%>
 L.marker([<%= pla.lat %>, <%= pla.lng %>]).addTo(map)
-    .bindPopup('<%= pla.name%>',{closeOnClick: false, autoClose: false});
-    //.openPopup();
+    .bindPopup('<%= pla.name%><br><%= pla.address%>',{closeOnClick: false, autoClose: false})
+    .openPopup();
 <%end%>
 
 </script>

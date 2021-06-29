@@ -61,8 +61,10 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 
 <%= for pla <- @place do%>
 L.marker([<%= pla.lat %>, <%= pla.lng %>]).addTo(map)
-    .bindPopup('<%= pla.name%>',{closeOnClick: false, autoClose: false});
+    .bindPopup('<%= pla.name%><br><%= pla.address%>',{closeOnClick: false, autoClose: false});
     //.openPopup();
 <%end%>
+
+var geojson = L.geoJson(GeoJsonData, geoJsonOptions).addTo(map);
 
 </script>
